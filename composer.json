@@ -1,5 +1,5 @@
 {
-    "name": "phpixie/orm",
+    "name": "phpixie/paginate",
     "description": "Pagination module for PHPixie",
     "keywords": ["pagination", "orm"],
     "homepage": "http://phpixie.com",
