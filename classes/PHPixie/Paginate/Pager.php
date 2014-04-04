@@ -35,6 +35,12 @@ abstract class Pager {
 	public $num_pages;
 	
 	/**
+	 * Total number of items
+	 * @var integer
+	 */
+	public $num_items;
+	
+	/**
 	 * Optional URL for the first page
 	 * @var string
 	 */
@@ -82,7 +88,8 @@ abstract class Pager {
 		$this->page_size = $page_size;
 			
 		$this->offset = $page_size * ($page - 1);
-		$this->num_pages = ceil($this->item_count() / $page_size);
+		$this->num_items = $this->item_count();
+		$this->num_pages = ceil($this->num_items / $page_size);
 		
 		$this->first_page_url = $first_page_url;
 	}
