@@ -41,6 +41,7 @@ class Paginate {
 	 */
 	public function __construct($pixie) {
 		$this->pixie = $pixie;
+		$pixie->assets_dirs[] = dirname(dirname(dirname(__FILE__))).'/assets/';
 	}
 	
 	/**
