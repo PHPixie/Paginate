@@ -86,11 +86,13 @@ abstract class Pager {
 		$this->items =  $items;
 		$this->page = $page;
 		$this->page_size = $page_size;
-			
-		$this->offset = $page_size * ($page - 1);
+
 		$this->num_items = $this->item_count();
 		$this->num_pages = ceil($this->num_items / $page_size);
-		
+		if ( $this->num_pages < $this->page ) {
+			$this->page   = 1;
+		}
+		$this->offset = $page_size * ($this->page - 1);
 		$this->first_page_url = $first_page_url;
 	}
 
