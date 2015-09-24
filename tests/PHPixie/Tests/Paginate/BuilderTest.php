@@ -20,25 +20,25 @@ class BuilderTest extends \PHPixie\Test\Testcase
      */
     public function testPager()
     {
-        $repository = $this->quickMock('\PHPixie\Paginate\Repository');
-        $pager = $this->builder->pager($repository, 15);
+        $Loader = $this->quickMock('\PHPixie\Paginate\Loader');
+        $pager = $this->builder->pager($Loader, 15);
         
         $this->assertInstance($pager, '\PHPixie\Paginate\Pager', array(
-            'repository' => $repository,
+            'Loader' => $Loader,
             'pageSize'   => 15
         ));
     }
     
     /**
-     * @covers ::arrayRepository
+     * @covers ::arrayLoader
      * @covers ::<protected>
      */
-    public function testArrayRepository()
+    public function testArrayLoader()
     {
         $items = array('test');
-        $repository = $this->builder->arrayRepository($items);
+        $Loader = $this->builder->arrayLoader($items);
         
-        $this->assertInstance($repository, '\PHPixie\Paginate\Repository\ArrayAccess', array(
+        $this->assertInstance($Loader, '\PHPixie\Paginate\Loader\ArrayAccess', array(
             'items' => $items
         ));
     }

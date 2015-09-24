@@ -4,13 +4,13 @@ namespace PHPixie\Paginate;
 
 class Builder
 {
-    public function pager($repository, $pageSize)
+    public function pager($Loader, $pageSize)
     {
-        return new Pager($repository, $pageSize);
+        return new Pager($Loader, $pageSize);
     }
     
-    public function arrayRepository($items)
+    public function arrayLoader($items)
     {
-        return new Repository\ArrayAccess($items);
+        return new Loader\ArrayAccess($items);
     }
 }

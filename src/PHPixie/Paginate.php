@@ -11,20 +11,20 @@ class Paginate
         $this->builder = $this->buildBuilder();
     }
     
-    public function pager($repository, $pageSize)
+    public function pager($Loader, $pageSize)
     {
-        return $this->builder->pager($repository, $pageSize);
+        return $this->builder->pager($Loader, $pageSize);
     }
     
-    public function arrayRepository($items)
+    public function arrayLoader($items)
     {
-        return $this->builder->arrayRepository($items);
+        return $this->builder->arrayLoader($items);
     }
     
     public function arrayPager($items, $pageSize)
     {
-        $repository = $this->builder->arrayRepository($items);
-        return $this->builder->pager($repository, $pageSize);
+        $Loader = $this->builder->arrayLoader($items);
+        return $this->builder->pager($Loader, $pageSize);
     }
     
     public function builder()

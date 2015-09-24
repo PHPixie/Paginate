@@ -1,8 +1,8 @@
 <?php
 
-namespace PHPixie\Paginate\Repository;
+namespace PHPixie\Paginate\Loader;
 
-class ArrayAccess implements \PHPixie\Paginate\Repository
+class ArrayAccess implements \PHPixie\Paginate\Loader
 {
     protected $items;
     

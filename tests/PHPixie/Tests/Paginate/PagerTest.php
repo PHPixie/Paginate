@@ -7,14 +7,14 @@ namespace PHPixie\Tests\Paginate;
  */
 class PagerTest extends \PHPixie\Test\Testcase
 {
-    protected $repository;
+    protected $Loader;
     protected $pageSize = 5;
     
     protected $pager;
     
     public function setUp()
     {
-        $this->repository = $this->quickMock('\PHPixie\Paginate\Repository');
+        $this->Loader = $this->quickMock('\PHPixie\Paginate\Loader');
         
         $this->pager = $this->pager();
     }
@@ -188,20 +188,20 @@ class PagerTest extends \PHPixie\Test\Testcase
         
         $iterator = $this->quickMock('\Iterator');
         $offset = 2*$this->pageSize;
-        $this->method($this->repository, 'getItems', $iterator, array($offset), 0);
+        $this->method($this->Loader, 'getItems', $iterator, array($offset), 0);
         
         $this->assertSame($iterator, $this->pager->getCurrentItems());
     }
     
-    protected function prepareRequireCount($itemCount, $repositoryAt = 0)
+    protected function prepareRequireCount($itemCount, $LoaderAt = 0)
     {
-        $this->method($this->repository, 'getCount', $itemCount, array(), $repositoryAt);
+        $this->method($this->Loader, 'getCount', $itemCount, array(), $LoaderAt);
     }
     
     protected function pager()
     {
         return new \PHPixie\Paginate\Pager(
-            $this->repository,
+            $this->Loader,
             $this->pageSize
         );
     }

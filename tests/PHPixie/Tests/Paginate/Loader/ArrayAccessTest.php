@@ -1,15 +1,15 @@
 <?php
 
-namespace PHPixie\Tests\Paginate\Repository;
+namespace PHPixie\Tests\Paginate\Loader;
 
 /**
- * @coversDefaultClass PHPixie\Paginate\Repository\ArrayAccess
+ * @coversDefaultClass PHPixie\Paginate\Loader\ArrayAccess
  */
 class ArrayAccessTest extends \PHPixie\Test\Testcase
 {
     protected $items = array();
     
-    protected $repository;
+    protected $Loader;
     
     public function setUp()
     {
@@ -17,7 +17,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
             $this->items[]= 'item'.$i;
         }
         
-        $this->repository = new \PHPixie\Paginate\Repository\ArrayAccess(
+        $this->Loader = new \PHPixie\Paginate\Loader\ArrayAccess(
             $this->items
         );
     }
@@ -38,7 +38,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
     public function testGetCount()
     {
         $count = count($this->items);
-        $this->assertSame($count, $this->repository->getCount());
+        $this->assertSame($count, $this->Loader->getCount());
     }
     
     /**
@@ -49,7 +49,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
     {
         $expect = array_slice($this->items, 5, 10);
         
-        $items = $this->repository->getItems(5, 10);
+        $items = $this->Loader->getItems(5, 10);
         $this->assertSame($expect, iterator_to_array($items));
     }
 }

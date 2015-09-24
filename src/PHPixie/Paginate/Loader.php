@@ -2,7 +2,7 @@
 
 namespace PHPixie\Paginate;
 
-interface Repository
+interface Loader
 {
     public function getCount();
     public function getItems($offset, $limit);

@@ -4,7 +4,7 @@ namespace PHPixie\Paginate;
 
 class Pager
 {
-    protected $repository;
+    protected $Loader;
     protected $pageSize;
     
     protected $currentPage = 1;
@@ -12,9 +12,9 @@ class Pager
     protected $pageCount;
     
     
-    public function __construct($repository, $pageSize)
+    public function __construct($Loader, $pageSize)
     {
-        $this->repository = $repository;
+        $this->Loader = $Loader;
         $this->pageSize   = $pageSize;
     }
     
@@ -111,7 +111,7 @@ class Pager
     protected function requireCount()
     {
         if($this->itemCount === null) {
-            $this->itemCount = $this->repository->getCount();
+            $this->itemCount = $this->Loader->getCount();
             $this->pageCount = (int) ceil($this->itemCount/$this->pageSize);
             if($this->pageCount === 0) {
                 $this->pageCount = 1;
@@ -122,7 +122,7 @@ class Pager
     public function getCurrentItems()
     {
         $offset = $this->pageSize * ($this->currentPage - 1);
-        return $this->repository->getItems(
+        return $this->Loader->getItems(
             $offset,
             $this->pageSize
         );

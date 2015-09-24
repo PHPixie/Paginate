@@ -38,24 +38,24 @@ class PaginateTest extends \PHPixie\Test\Testcase
      */
     public function testPager()
     {
-        $repository = $this->quickMock('\PHPixie\Paginate\Repository');
+        $Loader = $this->quickMock('\PHPixie\Paginate\Loader');
         $pager = $this->quickMock('\PHPixie\Paginate\Pager');
-        $this->method($this->builder, 'pager', $pager, array($repository, 15), 0);
+        $this->method($this->builder, 'pager', $pager, array($Loader, 15), 0);
         
-        $this->assertSame($pager, $this->paginate->pager($repository, 15));
+        $this->assertSame($pager, $this->paginate->pager($Loader, 15));
     }
     
     /**
-     * @covers ::arrayRepository
+     * @covers ::arrayLoader
      * @covers ::<protected>
      */
-    public function testArrayRepository()
+    public function testArrayLoader()
     {
         $items = array('test');
-        $repository = $this->quickMock('\PHPixie\Paginate\Repository\ArrayAccess');
-        $this->method($this->builder, 'arrayRepository', $repository, array($items), 0);
+        $Loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
+        $this->method($this->builder, 'arrayLoader', $Loader, array($items), 0);
         
-        $this->assertSame($repository, $this->paginate->arrayRepository($items));
+        $this->assertSame($Loader, $this->paginate->arrayLoader($items));
     }
     
     /**
@@ -75,11 +75,11 @@ class PaginateTest extends \PHPixie\Test\Testcase
     public function testArrayPager()
     {
         $items = array('test');
-        $repository = $this->quickMock('\PHPixie\Paginate\Repository\ArrayAccess');
-        $this->method($this->builder, 'arrayRepository', $repository, array($items), 0);
+        $Loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
+        $this->method($this->builder, 'arrayLoader', $Loader, array($items), 0);
         
         $pager = $this->quickMock('\PHPixie\Paginate\Pager');
-        $this->method($this->builder, 'pager', $pager, array($repository, 15), 1);
+        $this->method($this->builder, 'pager', $pager, array($Loader, 15), 1);
         
         $this->assertSame($pager, $this->paginate->arrayPager($items, 15));
     }
