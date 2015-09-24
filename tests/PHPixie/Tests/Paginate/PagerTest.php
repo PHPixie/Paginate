@@ -7,14 +7,14 @@ namespace PHPixie\Tests\Paginate;
  */
 class PagerTest extends \PHPixie\Test\Testcase
 {
-    protected $Loader;
+    protected $loader;
     protected $pageSize = 5;
     
     protected $pager;
     
     public function setUp()
     {
-        $this->Loader = $this->quickMock('\PHPixie\Paginate\Loader');
+        $this->loader = $this->quickMock('\PHPixie\Paginate\Loader');
         
         $this->pager = $this->pager();
     }
@@ -183,25 +183,38 @@ class PagerTest extends \PHPixie\Test\Testcase
      */
     public function testCurrentItems()
     {
-        $this->prepareRequireCount(6*$this->pageSize);
-        $this->pager->setCurrentPage(3);
+        $this->currentItemsTest(false);
+        $this->currentItemsTest(true);
+    }
+    
+    protected function currentItemsTest($isLastPage = false)
+    {
+        $this->pager = $this->pager();
+        
+        $itemCount = 6*$this->pageSize - 3;
+        $this->prepareRequireCount($itemCount);
+        
+        $currentPage = $isLastPage ? 6 : 3;
+        $this->pager->setCurrentPage($currentPage);
+        
+        $offset = ($currentPage - 1)*$this->pageSize;
+        $limit  = $isLastPage ? 2 : $this->pageSize;
         
         $iterator = $this->quickMock('\Iterator');
-        $offset = 2*$this->pageSize;
-        $this->method($this->Loader, 'getItems', $iterator, array($offset), 0);
+        $this->method($this->loader, 'getItems', $iterator, array($offset, $limit), 0);
         
         $this->assertSame($iterator, $this->pager->getCurrentItems());
     }
     
-    protected function prepareRequireCount($itemCount, $LoaderAt = 0)
+    protected function prepareRequireCount($itemCount, $loaderAt = 0)
     {
-        $this->method($this->Loader, 'getCount', $itemCount, array(), $LoaderAt);
+        $this->method($this->loader, 'getCount', $itemCount, array(), $loaderAt);
     }
     
     protected function pager()
     {
         return new \PHPixie\Paginate\Pager(
-            $this->Loader,
+            $this->loader,
             $this->pageSize
         );
     }

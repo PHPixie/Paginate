@@ -9,7 +9,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
 {
     protected $items = array();
     
-    protected $Loader;
+    protected $loader;
     
     public function setUp()
     {
@@ -17,7 +17,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
             $this->items[]= 'item'.$i;
         }
         
-        $this->Loader = new \PHPixie\Paginate\Loader\ArrayAccess(
+        $this->loader = new \PHPixie\Paginate\Loader\ArrayAccess(
             $this->items
         );
     }
@@ -38,7 +38,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
     public function testGetCount()
     {
         $count = count($this->items);
-        $this->assertSame($count, $this->Loader->getCount());
+        $this->assertSame($count, $this->loader->getCount());
     }
     
     /**
@@ -49,7 +49,7 @@ class ArrayAccessTest extends \PHPixie\Test\Testcase
     {
         $expect = array_slice($this->items, 5, 10);
         
-        $items = $this->Loader->getItems(5, 10);
+        $items = $this->loader->getItems(5, 10);
         $this->assertSame($expect, iterator_to_array($items));
     }
 }

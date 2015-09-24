@@ -4,9 +4,9 @@ namespace PHPixie\Paginate;
 
 class Builder
 {
-    public function pager($Loader, $pageSize)
+    public function pager($loader, $pageSize)
     {
-        return new Pager($Loader, $pageSize);
+        return new Pager($loader, $pageSize);
     }
     
     public function arrayLoader($items)

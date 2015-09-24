@@ -20,11 +20,11 @@ class BuilderTest extends \PHPixie\Test\Testcase
      */
     public function testPager()
     {
-        $Loader = $this->quickMock('\PHPixie\Paginate\Loader');
-        $pager = $this->builder->pager($Loader, 15);
+        $loader = $this->quickMock('\PHPixie\Paginate\Loader');
+        $pager = $this->builder->pager($loader, 15);
         
         $this->assertInstance($pager, '\PHPixie\Paginate\Pager', array(
-            'Loader' => $Loader,
+            'loader' => $loader,
             'pageSize'   => 15
         ));
     }
@@ -36,9 +36,9 @@ class BuilderTest extends \PHPixie\Test\Testcase
     public function testArrayLoader()
     {
         $items = array('test');
-        $Loader = $this->builder->arrayLoader($items);
+        $loader = $this->builder->arrayLoader($items);
         
-        $this->assertInstance($Loader, '\PHPixie\Paginate\Loader\ArrayAccess', array(
+        $this->assertInstance($loader, '\PHPixie\Paginate\Loader\ArrayAccess', array(
             'items' => $items
         ));
     }

@@ -11,9 +11,9 @@ class Paginate
         $this->builder = $this->buildBuilder();
     }
     
-    public function pager($Loader, $pageSize)
+    public function pager($loader, $pageSize)
     {
-        return $this->builder->pager($Loader, $pageSize);
+        return $this->builder->pager($loader, $pageSize);
     }
     
     public function arrayLoader($items)
@@ -23,8 +23,8 @@ class Paginate
     
     public function arrayPager($items, $pageSize)
     {
-        $Loader = $this->builder->arrayLoader($items);
-        return $this->builder->pager($Loader, $pageSize);
+        $loader = $this->builder->arrayLoader($items);
+        return $this->builder->pager($loader, $pageSize);
     }
     
     public function builder()

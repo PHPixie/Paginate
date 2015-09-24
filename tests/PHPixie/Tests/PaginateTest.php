@@ -38,11 +38,11 @@ class PaginateTest extends \PHPixie\Test\Testcase
      */
     public function testPager()
     {
-        $Loader = $this->quickMock('\PHPixie\Paginate\Loader');
+        $loader = $this->quickMock('\PHPixie\Paginate\Loader');
         $pager = $this->quickMock('\PHPixie\Paginate\Pager');
-        $this->method($this->builder, 'pager', $pager, array($Loader, 15), 0);
+        $this->method($this->builder, 'pager', $pager, array($loader, 15), 0);
         
-        $this->assertSame($pager, $this->paginate->pager($Loader, 15));
+        $this->assertSame($pager, $this->paginate->pager($loader, 15));
     }
     
     /**
@@ -52,10 +52,26 @@ class PaginateTest extends \PHPixie\Test\Testcase
     public function testArrayLoader()
     {
         $items = array('test');
-        $Loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
-        $this->method($this->builder, 'arrayLoader', $Loader, array($items), 0);
+        $loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
+        $this->method($this->builder, 'arrayLoader', $loader, array($items), 0);
         
-        $this->assertSame($Loader, $this->paginate->arrayLoader($items));
+        $this->assertSame($loader, $this->paginate->arrayLoader($items));
+    }
+    
+    /**
+     * @covers ::arrayPager
+     * @covers ::<protected>
+     */
+    public function testArrayPager()
+    {
+        $items = array('test');
+        $loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
+        $this->method($this->builder, 'arrayLoader', $loader, array($items), 0);
+        
+        $pager = $this->quickMock('\PHPixie\Paginate\Pager');
+        $this->method($this->builder, 'pager', $pager, array($loader, 15), 1);
+        
+        $this->assertSame($pager, $this->paginate->arrayPager($items, 15));
     }
     
     /**
@@ -65,23 +81,6 @@ class PaginateTest extends \PHPixie\Test\Testcase
     public function testBuilder()
     {
         $this->assertSame($this->builder, $this->paginate->builder());
-    }
-    
-    
-    /**
-     * @covers ::arrayPager
-     * @covers ::<protected>
-     */
-    public function testArrayPager()
-    {
-        $items = array('test');
-        $Loader = $this->quickMock('\PHPixie\Paginate\Loader\ArrayAccess');
-        $this->method($this->builder, 'arrayLoader', $Loader, array($items), 0);
-        
-        $pager = $this->quickMock('\PHPixie\Paginate\Pager');
-        $this->method($this->builder, 'pager', $pager, array($Loader, 15), 1);
-        
-        $this->assertSame($pager, $this->paginate->arrayPager($items, 15));
     }
     
     /**
