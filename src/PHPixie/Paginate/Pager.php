@@ -58,12 +58,12 @@ class Pager
         return null;
     }
     
-    public function previous()
+    public function previousPage()
     {
         return $this->getPageByOffset(-1);
     }
     
-    public function next()
+    public function nextPage()
     {
         return $this->getPageByOffset(1);
     }

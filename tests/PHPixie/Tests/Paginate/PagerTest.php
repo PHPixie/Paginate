@@ -118,11 +118,11 @@ class PagerTest extends \PHPixie\Test\Testcase
     }
     
     /**
-     * @covers ::next
-     * @covers ::previous
+     * @covers ::nextPage
+     * @covers ::previousPage
      * @covers ::<protected>
      */
-    public function testPreviousNext()
+    public function testPreviousNextPage()
     {
         $this->prepareRequireCount(3*$this->pageSize);
         
@@ -134,8 +134,8 @@ class PagerTest extends \PHPixie\Test\Testcase
         
         foreach($map as $page => $expect) {
             $this->pager->setCurrentPage($page);
-            $this->assertSame($expect[0], $this->pager->previous());
-            $this->assertSame($expect[1], $this->pager->next());
+            $this->assertSame($expect[0], $this->pager->previousPage());
+            $this->assertSame($expect[1], $this->pager->nextPage());
         }
     }
     
@@ -200,10 +200,10 @@ class PagerTest extends \PHPixie\Test\Testcase
         $offset = ($currentPage - 1)*$this->pageSize;
         $limit  = $isLastPage ? 2 : $this->pageSize;
         
-        $iterator = $this->quickMock('\Iterator');
-        $this->method($this->loader, 'getItems', $iterator, array($offset, $limit), 0);
+        $result = $this->quickMock('\IteratorAggregate');
+        $this->method($this->loader, 'getItems', $result, array($offset, $limit), 0);
         
-        $this->assertSame($iterator, $this->pager->getCurrentItems());
+        $this->assertSame($result, $this->pager->getCurrentItems());
     }
     
     protected function prepareRequireCount($itemCount, $loaderAt = 0)
