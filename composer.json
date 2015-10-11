@@ -16,7 +16,7 @@
         
     },
     "require-dev": {
-        "phpixie/test": "3.*@dev"
+        "phpixie/test": "~3.0"
     },
     "autoload": {
         "psr-4": {
