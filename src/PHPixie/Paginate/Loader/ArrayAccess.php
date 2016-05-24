@@ -22,6 +22,9 @@ class ArrayAccess implements \PHPixie\Paginate\Loader
         $end = $offset+$limit;
         
         for($i=$offset; $i<$end; $i++) {
+            if(!isset($this->items[$i])) {
+                break;
+            }
             $items[]=$this->items[$i];
         }
         
